@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.ItemRepository">
-	<select id="selectAll" resultType="com.example.demo.entity.Item">
-		select id,name,price,category_id as categoryId from item;
+	<resultMap type="com.example.demo.entity.Item" id="itemResult">
+		<id property="id" column="item_id" />
+		<result property="name" column="item_name" />
+		<result property="price" column="item_price" />
+		<result property="categoryId" column="item_category_id" />
+		<association property="itemCategory" javaType="com.example.demo.entity.ItemCategory">
+			<id property="id" column="item_category_id" />
+			<result property="name" column="item_category_name" />
+		</association>
+	</resultMap>
+	<select id="selectAll" resultMap="itemResult">
+		select 
+			i.id as item_id,
+			i.name as item_name,
+			i.price as item_price,
+			i.category_id as item_category_id,
+			ic.name as item_category_name
+		from 
+			item i
+		inner join
+			item_category ic
+		on
+			ic.id = i.category_id;
 	</select>
 </mapper>

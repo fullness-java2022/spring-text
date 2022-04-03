@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 public class ItemRepositoryTest {
 	@Autowired
-	ItemRepository repository;
+	private ItemRepository repository;
 	@Sql("/sql/data.sql")
 	@Test
 	void testSelectAll() {
