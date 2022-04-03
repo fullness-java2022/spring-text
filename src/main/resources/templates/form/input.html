@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>フォームの利用</title>
+</head>
+<body>
+	<h1>フォームの利用</h1>
+	<form action="/form/confirm" method="post" th:object="${itemForm}">
+		商品名: <input type="text" th:field="*{itemName}" /><br />
+		価格: <input type="number" th:field="*{itemPrice}" /><br />
+		<input type="submit" value="送信" />
+	</form>
+</body>
+</html>
