@@ -3,13 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>セッションの利用（入力）</title>
+<style>
+.error{ color:red; }
+</style>
 </head>
 <body>
 	<h1>セッションの利用（入力）</h1>
 	<form action="/session/confirm" method="post" th:object="${itemForm}">
-		商品名: <input type="text" th:field="*{itemName}" /><br />
-		単価: <input type="number" th:field="*{itemPrice}" /><br />
+		商品名: <input type="text" th:field="*{itemName}" />
+		<span class="error" th:errors="*{itemName}"></span><br />
+		単価: <input type="number" th:field="*{itemPrice}" />
+		<span class="error" th:errors="*{itemPrice}"></span><br />
 		<input type="submit" value="送信" />
+		<div class="error">
+			<span th:each="error:${#fields.detailedErrors()}">
+				<span th:text="${error.message}"></span><br />
+			</span>
+		</div>
 	</form>
 </body>
 </html>

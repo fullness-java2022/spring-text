@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,8 +27,9 @@ public class SessionController {
 		return "session/form";
 	}
 	@PostMapping("confirm")
-	public String confirm(@ModelAttribute ItemForm itemForm) {
+	public String confirm(@Validated @ModelAttribute ItemForm itemForm, BindingResult bindingResult) {
 		System.out.println("itemform"+itemForm);
+		if(bindingResult.hasErrors()) return "session/form";
 		return "session/confirm";
 	}
 	@PostMapping("execute")
