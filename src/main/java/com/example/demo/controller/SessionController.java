@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.form.ItemForm;
 
@@ -24,12 +25,17 @@ public class SessionController {
 		return "session/form";
 	}
 	@PostMapping("confirm")
-	public String confirm(@ModelAttribute ItemForm form) {
-		System.out.println("itemform"+form);
+	public String confirm(@ModelAttribute ItemForm itemForm) {
+		System.out.println("itemform"+itemForm);
 		return "session/confirm";
 	}
-	@PostMapping("complete")
-	public String complete(@ModelAttribute ItemForm form, Model model, SessionStatus sessionStatus) {
+	@PostMapping("execute")
+	public String execute(@ModelAttribute ItemForm itemForm, RedirectAttributes redirectAttributes) {
+		redirectAttributes.addFlashAttribute("itemForm",itemForm);
+		return "redirect:/session/complete";
+	}
+	@GetMapping("complete")
+	public String complete(@ModelAttribute ItemForm itemForm, Model model, SessionStatus sessionStatus) {
 		sessionStatus.setComplete();
 		return "session/complete";
 	}
