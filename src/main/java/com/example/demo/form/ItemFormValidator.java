@@ -12,6 +12,7 @@ public class ItemFormValidator implements Validator{
 	}
 	@Override
 	public void validate(Object target, Errors errors) {
+		//System.out.println("target:"+target);
 		ItemForm form = (ItemForm)target;
 		// 相関チェックする項目がnullだヌルポの例外が発生するので早期退出させる
 		if(form.getName() == null || form.getPrice() == null) return;

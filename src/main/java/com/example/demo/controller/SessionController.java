@@ -13,27 +13,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.form.ItemForm;
 import com.example.demo.form.ItemFormValidator;
+import com.example.demo.repository.ItemCategoryRepository;
 
-@SessionAttributes("itemForm")
+@SessionAttributes({"itemForm","categoryList"})
 @RequestMapping("session")
 @Controller
 public class SessionController {
+	@Autowired
+	private ItemFormValidator validator;
+	
+	@Autowired 
+	private ItemCategoryRepository itemCategoryRepository;
+	
 	@ModelAttribute("itemForm")
 	public ItemForm setup() {
 		return new ItemForm();
 	}
-	@Autowired private ItemFormValidator validator;
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		binder.addValidators(validator);
-	}
 	
+	@InitBinder
+	public void initBinder(WebDataBinder binder, WebRequest request) {
+		binder.setValidator(validator);
+	}
 	@GetMapping("form")
-	public String form() {
+	public String form(Model model) {
+		model.addAttribute("categoryList",itemCategoryRepository.selectAll());
 		return "session/form";
 	}
 	@PostMapping("confirm")
