@@ -17,23 +17,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.form.ItemForm;
 import com.example.demo.form.ItemFormValidator;
+import com.example.demo.repository.ItemCategoryRepository;
 
-@SessionAttributes("itemForm")
+@SessionAttributes({"itemForm","categoryList"})
 @RequestMapping("session")
 @Controller
 public class SessionController {
+	
+	@Autowired private ItemCategoryRepository repository;
+	@Autowired private ItemFormValidator validator;
+	
 	@ModelAttribute("itemForm")
 	public ItemForm setup() {
 		return new ItemForm();
 	}
-	@Autowired private ItemFormValidator validator;
-	@InitBinder
+	@InitBinder("itemForm")
 	public void initBinder(WebDataBinder binder) {
 		binder.addValidators(validator);
 	}
-	
 	@GetMapping("form")
-	public String form() {
+	public String form(Model model) {
+		model.addAttribute("categoryList", repository.selectAll());
 		return "session/form";
 	}
 	@PostMapping("confirm")

@@ -11,8 +11,9 @@ import lombok.Data;
 @Data
 public class ItemForm implements Serializable{
 	@NotBlank
-	private String itemName;
+	private String name;
 	@Min(50)
 	@NotNull
-	private Integer itemPrice;
+	private Integer price;
+	private Integer categoryId;
 }

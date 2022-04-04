@@ -10,10 +10,21 @@
 <body>
 	<h1>セッションの利用（入力）</h1>
 	<form action="/session/confirm" method="post" th:object="${itemForm}">
-		商品名: <input type="text" th:field="*{itemName}" />
-		<span class="error" th:errors="*{itemName}"></span><br />
-		単価: <input type="number" th:field="*{itemPrice}" />
-		<span class="error" th:errors="*{itemPrice}"></span><br />
+		商品名: <input type="text" th:field="*{name}" />
+		<span class="error" th:errors="*{name}"></span><br />
+		単価: <input type="number" th:field="*{price}" />
+		<span class="error" th:errors="*{price}"></span><br />
+		商品カテゴリ:
+		<select th:fields="*{categoryId}">
+			<option
+				th:each="category: ${categoryList}"
+				th:value="${category.id}"
+				th:selected="${category.id == categoryId}"
+				th:inline="text"
+				th:text="${category.name}"
+			>
+			</option>
+		</select><br />
 		<input type="submit" value="送信" />
 		<div class="error">
 			<span th:each="error:${#fields.detailedErrors()}">
