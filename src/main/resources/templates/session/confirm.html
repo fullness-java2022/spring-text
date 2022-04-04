@@ -8,6 +8,7 @@
 	<h1>セッションの利用（確認）</h1>
 	<p>商品名: <span th:text="${itemForm.name}"></span></p>
 	<p>単価: <span th:text="${itemForm.price}"></span></p>
+	<p>単価: <span th:text="${category.name}"></span></p>
 	<form action="/session/execute" method="post">
 		<input type="submit" value="送信" />
 	</form>

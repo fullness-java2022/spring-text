@@ -15,7 +15,7 @@
 		単価: <input type="number" th:field="*{price}" />
 		<span class="error" th:errors="*{price}"></span><br />
 		商品カテゴリ:
-		<select th:fields="*{categoryId}">
+		<select th:field="*{categoryId}">
 			<option
 				th:each="category: ${categoryList}"
 				th:value="${category.id}"
