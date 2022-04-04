@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>セッションの利用（完了）</title>
+</head>
+<body>
+	<h1>セッションの利用（完了）</h1>
+	<p>下記を登録完了しました。</p>
+	<p>商品名 <span th:text="${itemForm.itemName}"></span></p>
+	<p>価格 <span th:text="${itemForm.itemPrice}"></span></p>
+	<a href="/session/form">戻る</a>
+</body>
+</html>

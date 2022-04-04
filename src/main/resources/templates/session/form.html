@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>セッションの利用（入力）</title>
+</head>
+<body>
+	<h1>セッションの利用（入力）</h1>
+	<form action="/session/confirm" method="post" th:object="${itemForm}">
+		商品名: <input type="text" th:field="*{itemName}" /><br />
+		単価: <input type="number" th:field="*{itemPrice}" /><br />
+		<input type="submit" value="送信" />
+	</form>
+</body>
+</html>
