@@ -9,4 +9,5 @@ import com.example.demo.entity.Item;
 @Mapper
 public interface ItemRepository {
 	List<Item> selectAll();
+	void insert(Item item);
 }

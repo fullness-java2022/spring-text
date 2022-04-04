@@ -20,7 +20,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.entity.ItemCategory;
 import com.example.demo.form.ItemForm;
 import com.example.demo.form.ItemFormValidator;
+import com.example.demo.helper.ItemHelper;
 import com.example.demo.repository.ItemCategoryRepository;
+import com.example.demo.service.ItemService;
 
 @SessionAttributes({"itemForm","categoryList"})
 @RequestMapping("session")
@@ -59,8 +61,10 @@ public class SessionController {
 		model.addAttribute("category",category);
 		return "session/confirm";
 	}
+	@Autowired ItemService itemService;
 	@PostMapping("execute")
 	public String execute(@ModelAttribute ItemForm itemForm, RedirectAttributes redirectAttributes) {
+		itemService.addItem(ItemHelper.convert(itemForm));
 		redirectAttributes.addFlashAttribute("itemForm",itemForm);
 		return "redirect:/session/complete";
 	}
