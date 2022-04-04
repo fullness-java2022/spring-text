@@ -9,6 +9,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
+	developmentOnly
+    runtimeClasspath {
+            extendsFrom developmentOnly
+    }
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -19,6 +23,8 @@ repositories {
 }
 
 dependencies {
+	implementation 'javax.validation:validation-api'
+	runtimeOnly 'org.hibernate.validator:hibernate-validator'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
