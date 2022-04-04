@@ -26,9 +26,9 @@ import com.example.demo.repository.ItemCategoryRepository;
 @RequestMapping("session")
 @Controller
 public class SessionController {
-	
 	@Autowired private ItemCategoryRepository repository;
 	@Autowired private ItemFormValidator validator;
+
 	
 	@ModelAttribute("itemForm")
 	public ItemForm setup() {
