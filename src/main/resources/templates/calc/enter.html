@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>足し算（入力）</title>
+</head>
+<body>
+	<h1>足し算（入力）</h1>
+	<form th:action="@{/calc}" method="post" th:object="${calcForm}">
+		<input type="number" th:field="*{value1}" />
+		+
+		<input type="number" th:field="*{value2}" />
+		<br>
+		<input type="submit" value="計算" />
+	</form>
+</body>
+</html>
