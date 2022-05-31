@@ -15,15 +15,9 @@ import com.example.demo.entity.Item;
 @ExtendWith(SpringExtension.class)
 @MybatisTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class ItemRepositoryTest {
+public class ItemRepositoryMybatisTest {
 	@Autowired
-	private ItemRepository repository;
-	@Sql("/sql/data.sql")
-	@Test
-	void testSelectAll() {
-		repository.selectAll().forEach(System.out::println);
-		assertEquals(28, repository.selectAll().size());
-	}
+	ItemRepository repository;
 
 	@Sql("/sql/data.sql")
 	@Test
@@ -54,18 +48,4 @@ public class ItemRepositoryTest {
 		assertEquals(28, repository.selectAll().size());
 	}
 
-	@Sql("/sql/data.sql")
-	@Test
-	void testUpdatePessimisticLock() {
-		Item item = repository.selectByIdForUpdate(3);
-		item.setName("テスト商品");
-		item.setPrice(1000);
-		item.setCategoryId(2);
-		repository.update(item);
-		repository.selectAll().forEach(System.out::println);
-		Item updatedItem = repository.selectById(3);
-		assertEquals("テスト商品", updatedItem.getName());
-		assertEquals(1000, updatedItem.getPrice());
-		assertEquals(2, updatedItem.getCategoryId());
-	}
 }

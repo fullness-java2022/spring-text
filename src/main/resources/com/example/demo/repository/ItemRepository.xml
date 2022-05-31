@@ -11,6 +11,7 @@
 			<result property="name" column="item_category_name" />
 		</association>
 	</resultMap>
+
 	<select id="selectAll" resultMap="itemResult">
 		select
 			i.id as item_id,
@@ -25,10 +26,52 @@
 		on
 			ic.id = i.category_id;
 	</select>
+
+	<select id="selectById" parameterType="int" resultType="com.example.demo.entity.Item">
+		select
+			id,
+			name,
+			price,
+			category_id as categoryId
+		from
+			item
+		where
+			id = #{id};
+	</select>
+
+	<select id="selectByIdForUpdate" parameterType="int" resultType="com.example.demo.entity.Item">
+		select
+			id,
+			name,
+			price,
+			category_id as categoryId
+		from
+			item
+		where
+			id = #{id}
+		for update;
+	</select>
+
 	<insert id="insert" parameterType="com.example.demo.entity.Item">
-	<selectKey keyProperty="id" resultType="int" order="BEFORE">
-		select nextval('item_id_seq');
-	</selectKey>
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select nextval('item_id_seq');
+		</selectKey>
 		insert into item values(#{id},#{name},#{price},#{categoryId})
 	</insert>
+
+	<update id="update" parameterType="com.example.demo.entity.Item">
+		update
+			item
+		set
+			name = #{name},
+			price = #{price},
+			category_id = #{categoryId}
+		where
+			id = #{id};
+	</update>
+
+	<delete id="delete" parameterType="com.example.demo.entity.Item">
+		delete from item where id = #{id};
+	</delete>
+
 </mapper>
