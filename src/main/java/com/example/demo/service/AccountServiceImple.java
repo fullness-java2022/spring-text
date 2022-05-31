@@ -9,7 +9,7 @@ import com.example.demo.repository.AccountRepository;
 @Service
 public class AccountServiceImple implements AccountService{
 	@Autowired
-	AccountRepository repository;
+	private AccountRepository repository;
 
 	@Override
 	public void addAccount(Account account) {

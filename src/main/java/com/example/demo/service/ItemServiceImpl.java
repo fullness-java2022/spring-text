@@ -7,7 +7,8 @@ import com.example.demo.entity.Item;
 import com.example.demo.repository.ItemRepository;
 @Service
 public class ItemServiceImpl implements ItemService{
-	@Autowired ItemRepository repository;
+	@Autowired
+	private ItemRepository repository;
 	@Override
 	public void addItem(Item item) {
 		repository.insert(item);
