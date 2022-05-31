@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>ログイン</title>
+<style>
+	.error{ color:red; }
+</style>
+</head>
+<body>
+	<h1>メニュー</h1>
+	<div sec:authorize="isAuthenticated()">
+		ユーザ名: <span sec:authentication="principal.username"></span>
+		<p sec:authorize="hasRole('GUEST')" ><a href="#">ゲスト機能</a></p>
+		<p sec:authorize="hasRole('USER')" ><a href="#">ユーザ機能</a></p>
+		<p sec:authorize="hasRole('ADMIN')" ><a href="#">管理者機能</a></p>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="ログアウト" />
+		</form>
+	</div>
+</body>
+</html>

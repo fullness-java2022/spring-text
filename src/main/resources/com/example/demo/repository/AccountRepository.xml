@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.AccountRepository">
+	<insert id="insert" parameterType="com.example.demo.entity.Account">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select nextval('account_id_seq');
+		</selectKey>
+		insert into account values(#{id},#{name},#{password},#{role.id})
+	</insert>
+	<resultMap type="com.example.demo.entity.Account" id="accountResult">
+		<id property="id" column="account_id" />
+		<result property="name" column="account_name" />
+		<result property="password" column="account_password" />
+		<association property="role" javaType="com.example.demo.entity.AccountRole">
+			<id property="id" column="role_id" />
+			<result property="name" column="role_name" />
+		</association>
+	</resultMap>
+	<select id="selectByUserName" resultMap="accountResult">
+		select
+			a.id as account_id,
+			a.name as account_name,
+			a.password as account_password,
+			ar.id as role_id,
+			ar.name as role_name
+		from
+			account a
+		inner join
+			account_role ar
+		on
+			a.account_role_id = ar.id
+		where
+			a.name = #{username}
+	</select>
+</mapper>
