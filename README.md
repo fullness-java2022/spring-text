@@ -7,7 +7,6 @@
 - [eclipseおすすめ設定](text/eclipse-osusume.md)
 - [eclipseにplantumlプラグインのインストール](text/eclipse-plantuml.md)
 - [eclipseにEmmetプラグインの追加](text/https://blog.goo.ne.jp/siyokuanjin/e/43764761c736fe29f9a13cec6312e7be)
-- [eclipseにlombok.jarの登録](text/eclipse-lombok-install.md)
 - [eclipseにSpring Bootプロジェクト作成](text/new-spring-project.md)
 
 ## lombok
