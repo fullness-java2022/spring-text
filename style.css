@@ -1,0 +1,32 @@
+p,table,li,pre,code {
+    font-size: 11px;
+}
+
+pre>code{
+    font-size: 11px !important;
+}
+
+.vscode-body pre {
+    border: 1px solid black;
+}
+
+pre>code.language-cmd>div{
+    background-color:black !important;
+    color: white;
+    padding: 10px;
+    margin: -15px;
+    white-space: break-spaces !important;
+}
+
+pre>code.language-cmd>div .hljs-built_in,pre>code.language-cmd>div .hljs-keyword{
+    color: white;
+}
+
+em {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.vscode-body img {
+    border: 1px solid black;
+}
