@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>画像アップロード（確認）</title>
+</head>
+<body>
+	<h1>画像アップロード（確認）</h1>
+	<img th:src="${image}" width="500" />
+	<form action="/image/complete" method="post">
+		<input type="submit" value="画像アップロード" />
+	</form>
+	<a href="/image">戻る</a>
+</body>
+</html>
